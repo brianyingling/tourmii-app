@@ -1,15 +1,10 @@
-angular.module('starter.controllers', [])
+angular.module('tourmii.controllers', [])
 
-.controller('DashCtrl', function($scope) {
-})
+.controller('LoginCtrl', ['$scope', function($scope) {
+  debugger;
+  $scope.user = {};
+  $scope.user.email = "bob";
+}])
 
-.controller('FriendsCtrl', function($scope, Friends) {
-  $scope.friends = Friends.all();
-})
-
-.controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
-  $scope.friend = Friends.get($stateParams.friendId);
-})
-
-.controller('AccountCtrl', function($scope) {
-});
+.controller('RegisterCtrl', ['$scope', function($scope) {
+}]);
