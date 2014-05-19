@@ -46,7 +46,7 @@ angular.module('tourmii', ['ionic', 'tourmii.controllers', 'tourmii.services'])
       views: {
         'tab-register': {
           templateUrl: 'templates/tab-register.html',
-          controller: 'FriendsCtrl'
+          controller: 'RegisterCtrl'
         }
       }
     })
