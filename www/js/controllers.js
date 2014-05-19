@@ -10,11 +10,14 @@ angular.module('tourmii.controllers', [])
     $http.post("http://localhost:3000/login", $scope.user)
       .success(function(data) {
         // data is the user object with all of his/her tours
+        // debugger;
+        localStorage['tourmii_session_id'] = data.user.id;
+
         $scope.tours = data.user.tours;
         console.log(data);
       })
-      .failure(function(data) {
-        debugger;
+      .error(function(data) {
+        // debugger;
         console.log(data);
       });
   };
