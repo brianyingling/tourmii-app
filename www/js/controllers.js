@@ -1,11 +1,11 @@
 angular.module('tourmii.controllers', [])
 
-.controller('LoginCtrl', function($scope) {
+.controller('LoginCtrl', ['$scope', function($scope) {
   debugger;
   return true;
   // $scope.user = {};
   // $scope.user.email = "bob";
-})
+}])
 
-.controller('RegisterCtrl', function($scope) {
-});
+.controller('RegisterCtrl', ['$scope', function($scope) {
+}]);
