@@ -1,4 +1,4 @@
-angular.module('tourmii', ['ionic', 'tourmii.controllers', 'tourmii.services'])
+var app = angular.module('tourmii', ['ionic', 'tourmii.controllers', 'tourmii.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
