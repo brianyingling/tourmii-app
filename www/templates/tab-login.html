@@ -1,19 +1,21 @@
 <ion-view title="Tourmii">
   <ion-content class="has-header padding">
     <h1>Login</h1>
-    <form action="">
+    <form action="" ng-submit="submit()" ng-controller="LoginCtrl">
 
       <label for="email" class='item item-input'>
-        <input type="text" placeholder="email" />
+        <input type="text" placeholder="email" ng-model="email"/>
       </label>
 
       <label for="password" class='item item-input'>
-        <input type='password' placeholder='password' />
+        <input type='password' placeholder='password' ng-model="password" />
       </label>
 
       <button class="button button-block button-positive">
         Sign In
       </button>
+      {{email}}
+      {{tours}}
 
     </form>
   </ion-content>
