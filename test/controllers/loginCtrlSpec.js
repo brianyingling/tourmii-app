@@ -1,5 +1,5 @@
 describe('LoginCtrl', function() {
-  var $scope, $rootScope, createController;
+  var $scope, $rootScope, $controller, createController;
   var loginCtrl;
   // beforeEach(inject(function($injector) {
   //   $rootScope  = $injector.get('$rootScope');
@@ -12,15 +12,18 @@ describe('LoginCtrl', function() {
   // }));
 
   beforeEach(module('tourmii.controllers'));
-  beforeEach(inject(function($controller){
-    loginCtrl = $controller("LoginCtrl");
+  beforeEach(inject(function($injector){
+    $rootScope = $injector.get('$rootScope');
+    $scope = $rootScope.$new();
+    $controller = $injector.get("$controller");
+    loginCtrl = $controller("LoginCtrl", {'$scope':$scope});
 
   }));
 
   it('has a LoginCtrl controller', function() {
-      var scope = $rootScope.$new();
-      var ctrl  = $controller('LoginCtrl', {$scope: scope});
-      expect(createController()).toBeDefined();
+      // var scope = $rootScope.$new();
+      // var ctrl  = $controller('LoginCtrl', {$scope: scope});
+      expect(loginCtrl).toBeDefined();
 
   });
 
