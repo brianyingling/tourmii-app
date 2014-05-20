@@ -1,6 +1,23 @@
 describe('RegisterCtrl', function() {
 
   var $rootScope, $httpBackend, $scope, $controller, registerCtrl;
+  var url = 'http://localhost:3000/users';
+  var resp = {
+        user: {
+          id: 1,
+          firstName: 'Bob',
+          lastName:  'Bob',
+          tours: []
+        },
+      };
+  var data = {
+        error: {
+          messages: {
+            email: "has already been taken"
+          }
+        }
+      };
+
 
   beforeEach(module('tourmii.controllers'));
 
@@ -13,29 +30,24 @@ describe('RegisterCtrl', function() {
   }));
 
   describe('submit', function() {
-    var resp;
-    beforeEach(function() {
-      resp = {
-        user: {
-          id: 1,
-          firstName: 'Bob',
-          lastName:  'Bob',
-          tours: []
-        },
-      };
-    });
-
     it('receives a user obj on successful signup', function() {
-
-      $httpBackend.expectPOST('http://localhost:3000/users')
+      $httpBackend.expectPOST(url)
         .respond(resp);
       $scope.submit();
-      $httpBackend.verifyNoOutstandingExpectation();
-      $httpBackend.verifyNoOutstandingRequest();
-
+      $httpBackend.flush();
     });
 
+    it('receives error messages when signup fails', function() {
+      $httpBackend.expectPOST(url).respond(data);
+        $scope.submit();
+        $httpBackend.flush();
+        expect($scope.errors).toBeDefined();
+    });
 
+    afterEach(function() {
+      $httpBackend.verifyNoOutstandingExpectation();
+      $httpBackend.verifyNoOutstandingRequest();
+    });
   });
 
 });
