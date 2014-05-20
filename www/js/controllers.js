@@ -6,7 +6,6 @@ angular.module('tourmii.controllers', [])
   $scope.submit = function(){
     $scope.user.email    = $scope.email;
     $scope.user.password = $scope.password;
-    delete $http.defaults.headers.common["X-Requested-With"];
     $http.post("http://localhost:3000/login", $scope.user)
       .success(function(data) {
         // data is the user object with all of his/her tours
