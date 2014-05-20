@@ -16,8 +16,9 @@ describe('LoginCtrl', function() {
   });
 
   describe('.submit', function() {
-    it('receives a user obj on successful HTTP request', function() {
-        var resp = {
+    var resp;
+    beforeEach(function() {
+      resp = {
           user: {
             tours: [
               {description:'tours'},
@@ -25,11 +26,19 @@ describe('LoginCtrl', function() {
             ]
           }
         };
-
-        $httpBackend.expectPOST('http://localhost:3000/login')
+      $httpBackend.expectPOST('http://localhost:3000/login')
           .respond(resp);
-        $scope.submit();
+      $scope.submit();
+
+    });
+    it('receives a user obj on successful HTTP request', function() {
+        expect($scope.user).toBeDefined();
         $httpBackend.flush();
+    });
+
+    it('saves the session id to localStorage on successful HTTP request', function() {
+      expect(localStorage['tourmii_session_id']).toBeDefined();
+      $httpBackend.flush();
     });
 
   });
