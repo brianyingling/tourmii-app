@@ -23,4 +23,12 @@ angular.module('tourmii.controllers', [])
 }])
 
 .controller('RegisterCtrl', ['$scope', function($scope) {
+  $scope.user   = {};
+  $scope.errors = [];
+
+  $scope.submit = function() {
+
+  };
+
+
 }]);
