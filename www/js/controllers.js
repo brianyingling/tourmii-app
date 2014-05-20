@@ -13,6 +13,7 @@ angular.module('tourmii.controllers', [])
         console.log(data);
         localStorage['tourmii_session_id'] = data.user.id;
         $scope.tours = data.user.tours;
+        $location.path("/tab/register");
       })
       .error(function(data) {
         console.log(data);
