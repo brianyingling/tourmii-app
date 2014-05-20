@@ -3,29 +3,34 @@
     <h1>Register</h1>
     <form action="">
       <label for="email" class='item item-input'>
-        <input type="text" placeholder="email" />
+        <input type="text" placeholder="email" ng-model="email"/>
       </label>
 
       <label for="first_name" class="item item-input">
-        <input type="text" placeholder="first name"/>
+        <input type="text" placeholder="first name" ng-model="firstName"/>
       </label>
 
       <label for="last_name" class="item item-input">
-        <input type="text" placeholder="last name"/>
+        <input type="text" placeholder="last name" ng-model="lastName"/>
       </label>
 
 
       <label for="password" class="item item-input">
-        <input type="password" placeholder="password" />
+        <input type="password" placeholder="password" ng-model="password"/>
       </label>
 
       <label for="confirm_password" class="item item-input">
-        <input type="password" placeholder="confirm password" />
+        <input type="password" placeholder="confirm password" ng-model="confirmPassword"/>
       </label>
 
       <button class="button button-block button-positive">
         Register
       </button>
+
+      <button class="button button-block button-assertive">
+        Clear Fields
+      </button>
+
 
     </form>
 
