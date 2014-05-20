@@ -31,6 +31,8 @@ angular.module('tourmii.controllers', [])
     $http.post("http://localhost:3000/users", {user:$scope.user})
       .success(function(data) {
         $scope.user = data;
+        console.log("id",data.user.id);
+        localStorage.setItem('tourmii_session_id', data.user.id);
         $location.path('/tours');
         console.log(data);
       })
