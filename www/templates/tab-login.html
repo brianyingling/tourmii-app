@@ -3,6 +3,10 @@
     <h1>Login</h1>
     <form action="" ng-submit="submit()" ng-controller="LoginCtrl">
 
+      <div class="error" ng-repeat="error in errors">
+        {{error}}
+      </div>
+
       <label for="email" class='item item-input'>
         <input type="text" placeholder="email" ng-model="email"/>
       </label>
