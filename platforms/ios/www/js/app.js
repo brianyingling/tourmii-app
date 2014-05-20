@@ -1,5 +1,7 @@
-var app = angular.module('tourmii', ['ionic', 'tourmii.controllers'])
-
+var app = angular.module('tourmii', [
+  'ionic',
+  'tourmii.controllers',
+  'tourmii.services'])
 .run(['$ionicPlatform', function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -14,7 +16,8 @@ var app = angular.module('tourmii', ['ionic', 'tourmii.controllers'])
   });
 }])
 
-.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider','$urlRouterProvider', '$httpProvider','$locationProvider',
+  function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -68,10 +71,16 @@ var app = angular.module('tourmii', ['ionic', 'tourmii.controllers'])
           controller: 'AccountCtrl'
         }
       }
-    })
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/login');
+
+  delete $httpProvider.defaults.headers.common["X-Requested-With"];
+
+  // # Without server side support html5 must be disabled.
+  $locationProvider.html5Mode(false);
+
 
 }]);
 
