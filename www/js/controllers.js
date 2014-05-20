@@ -22,12 +22,27 @@ angular.module('tourmii.controllers', [])
   };
 }])
 
-.controller('RegisterCtrl', ['$scope', function($scope) {
+.controller('RegisterCtrl', ['$scope', '$http', '$location',
+  function($scope, $http, $location) {
   $scope.user   = {};
   $scope.errors = [];
 
   $scope.submit = function() {
-
+    $http.post("http://localhost:3000/users", {user:$scope.user})
+      .success(function(data) {
+        $scope.user = data;
+        $location.path('/tours');
+        console.log(data);
+      })
+      .error(function(data) {
+        errors = [];
+        for(var name in data.error.messages) {
+          error = name + ' ' + data.error.messages[name];
+          errors.push(error);
+        }
+        $scope.errors = errors;
+        console.log(data);
+      });
   };
 
 
