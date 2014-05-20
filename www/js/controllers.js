@@ -1,6 +1,6 @@
 angular.module('tourmii.controllers', [])
 
-.controller('LoginCtrl', ['$scope', '$http', function($scope, $http) {
+.controller('LoginCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
   $scope.user = {};
   $scope.errors = [];
 
