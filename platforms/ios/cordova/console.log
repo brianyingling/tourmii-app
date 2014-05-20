@@ -9,3 +9,14 @@ objc[91997]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.a
 2014-05-19 09:56:27.841 HelloCordova[91997:90b] [CDVTimer][TotalPluginStartup] 1.839995ms
 2014-05-19 09:56:27.954 HelloCordova[91997:90b] Resetting plugins due to page load.
 2014-05-19 09:56:28.224 HelloCordova[91997:90b] Finished load of: file:///Users/brianyingling/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/D3E8F9DF-D2A1-4363-BC4F-3281BB1A2321/HelloCordova.app/www/index.html#/tab/dash
+objc[21523]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-05-19 14:33:15.312 HelloCordova[21523:90b] Cannot find executable for CFBundle 0xb884360 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-05-19 14:33:15.314 HelloCordova[21523:90b] Cannot find executable for CFBundle 0xa23aa50 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-05-19 14:33:15.372 HelloCordova[21523:90b] Multi-tasking -> Device: YES, App: YES
+2014-05-19 14:33:15.398 HelloCordova[21523:90b] Unlimited access to network resources
+2014-05-19 14:33:16.600 HelloCordova[21523:90b] [CDVTimer][keyboard] 0.105977ms
+2014-05-19 14:33:16.601 HelloCordova[21523:90b] CDVPlugin class CDVStatusBar (pluginName: statusbar) does not exist.
+2014-05-19 14:33:16.602 HelloCordova[21523:90b] [CDVTimer][statusbar] 0.481009ms
+2014-05-19 14:33:16.602 HelloCordova[21523:90b] [CDVTimer][TotalPluginStartup] 2.045989ms
+2014-05-19 14:33:16.891 HelloCordova[21523:90b] Resetting plugins due to page load.
+2014-05-19 14:33:17.327 HelloCordova[21523:90b] Finished load of: file:///Users/brianyingling/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/D3E8F9DF-D2A1-4363-BC4F-3281BB1A2321/HelloCordova.app/www/index.html#/tab/login
