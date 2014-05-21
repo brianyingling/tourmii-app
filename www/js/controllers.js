@@ -1,6 +1,6 @@
 angular.module('tourmii.controllers', [])
 
-.controller('LoginCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+.controller('LoginCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
   $scope.user = {};
   $scope.errors = [];
 
@@ -13,7 +13,7 @@ angular.module('tourmii.controllers', [])
         console.log(data);
         localStorage['tourmii_session_id'] = data.user.id;
         $scope.tours = data.user.tours;
-        $location.path("/tab/register");
+        $state.transitionTo('tab.register');
       })
       .error(function(data) {
         console.log(data);
