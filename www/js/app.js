@@ -75,13 +75,8 @@ var app = angular.module('tourmii', [
 
     .state('tours', {
       url: '/tours',
-      views: {
-        'tours':{
-          // template: "<h1>Blah!</h1>",
-          templateUrl:'templates/tours.html',
-          controller: 'ToursCtrl'
-        }
-      }
+      templateUrl:'templates/tours.html',
+      controller: 'ToursCtrl'
     });
 
   // if none of the above states are matched, use this as the fallback
