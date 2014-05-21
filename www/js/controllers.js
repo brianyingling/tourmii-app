@@ -11,9 +11,8 @@ angular.module('tourmii.controllers', [])
     $scope.user.password = $scope.password;
     $http.post("http://localhost:3000/login", $scope.user)
       .success(function(data) {
-        // console.log(data);
-        localStorage['tourmii_session_id'] = data.user.id;
-        toursService.setTours(data.user.tours);
+        localStorage['tourmii_session_id'] = data.id;
+        toursService.setTours(data.tours);
         console.log(toursService);
         $state.go('tours');
       })
@@ -39,7 +38,7 @@ angular.module('tourmii.controllers', [])
           $location.path('/tours');
         })
         .error(function(data) {
-          errors = [];
+          var errors = [];
           for(var name in data.error.messages) {
             error = name + ' ' + data.error.messages[name];
             errors.push(error);
@@ -58,6 +57,18 @@ angular.module('tourmii.controllers', [])
 }])
 
 // TODO - handle list of user's tours
-.controller('ToursCtrl', ['$scope', 'toursService', function($scope, toursService) {
+.controller('ToursCtrl', ['$scope', '$state', 'toursService',
+  function($scope, $state, toursService) {
   $scope.tours = toursService.getTours();
+  console.log($scope.tours);
+  $scope.viewTour = function(id) {
+    console.log(id);
+    $state.go('tour-detail');
+  }
+
+
+}])
+
+.controller('TourDetailCtrl', ['$scope', function($scope) {
+
 }]);
