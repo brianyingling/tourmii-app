@@ -34,6 +34,8 @@ describe('RegisterCtrl', function() {
       return store[key] = value;
     });
 
+    $scope.user.password = 'same';
+    $scope.user.password_confirmation = 'same';
   }));
 
   describe('submit', function() {
@@ -55,10 +57,15 @@ describe('RegisterCtrl', function() {
       $scope.status = "ERROR";
       $scope.submit();
       $httpBackend.flush();
-      console.log(store);
-      console.log(resp.user.id);
       var id = resp.user.id;
       expect(store).toBeDefined();
+    });
+
+    it('does not send an HTTP request if registration is invalid', function() {
+      $scope.user.password = 'same';
+      $scope.user.password_confirmation = 'different';
+      $scope.submit();
+      // afterEach() should verify that there are no oustanding requests / expectations
     });
 
     afterEach(function() {
@@ -67,4 +74,14 @@ describe('RegisterCtrl', function() {
     });
   });
 
+  describe('validate', function() {
+    it('returns true if password and confirm_password match', function() {
+      expect(registerCtrl.validate()).toBe(true);
+    });
+    it('returns false if password and confirm_password do not match', function() {
+      $scope.user.password = 'same';
+      $scope.user.password_confirmation = "different";
+      expect(registerCtrl.validate()).toBe(false);
+    });
+  });
 });
