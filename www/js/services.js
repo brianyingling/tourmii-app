@@ -22,5 +22,18 @@ angular.module('tourmii.services', [])
       // Simple index lookup
       return friends[friendId];
     }
-  }
+  };
+})
+
+.service('toursService', function() {
+  var tours;
+  return {
+    setTours: function(ts) {
+      tours = ts;
+    },
+    getTours: function() {
+      return tours;
+    }
+  };
+
 });
