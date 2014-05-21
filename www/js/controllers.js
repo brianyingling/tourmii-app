@@ -13,7 +13,7 @@ angular.module('tourmii.controllers', [])
         console.log(data);
         localStorage['tourmii_session_id'] = data.user.id;
         $scope.tours = data.user.tours;
-        $state.transitionTo('tab.register');
+        $state.go('tours');
       })
       .error(function(data) {
         console.log(data);
@@ -53,6 +53,9 @@ angular.module('tourmii.controllers', [])
   this.validate = function() {
     return $scope.user.password === $scope.user.password_confirmation;
   };
+}])
 
+// TODO - handle list of user's tours
+.controller('ToursCtrl', ['$scope', function($scope) {
 
 }]);
