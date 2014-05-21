@@ -1,6 +1,7 @@
 angular.module('tourmii.controllers', [])
 
-.controller('LoginCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
+.controller('LoginCtrl', ['$scope', '$http', '$state', 'toursService',
+  function($scope, $http, $state, toursService) {
   $scope.user = {};
   $scope.errors = [];
 
@@ -10,9 +11,10 @@ angular.module('tourmii.controllers', [])
     $scope.user.password = $scope.password;
     $http.post("http://localhost:3000/login", $scope.user)
       .success(function(data) {
-        console.log(data);
+        // console.log(data);
         localStorage['tourmii_session_id'] = data.user.id;
-        $scope.tours = data.user.tours;
+        toursService.setTours(data.user.tours);
+        console.log(toursService);
         $state.go('tours');
       })
       .error(function(data) {
@@ -56,6 +58,6 @@ angular.module('tourmii.controllers', [])
 }])
 
 // TODO - handle list of user's tours
-.controller('ToursCtrl', ['$scope', function($scope) {
-
+.controller('ToursCtrl', ['$scope', 'toursService', function($scope, toursService) {
+  $scope.tours = toursService.getTours();
 }]);
