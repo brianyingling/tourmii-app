@@ -64,16 +64,9 @@ angular.module('tourmii.controllers', [])
     console.log('id',id);
     $state.go('tour-detail', {tourId:id});
   }
-
-
 }])
 
-.controller('TourDetailCtrl', ['$scope','$stateParams','toursService',
-  function($scope, $stateParams, toursService) {
-  var id, tour;
-
-  id   = $stateParams.tourId;
-  console.log('id',id);
+.controller('TourDetailCtrl', ['$scope','$stateParams','toursService', function($scope, $stateParams, toursService) {
+  var id      = $stateParams.tourId;
   $scope.tour = toursService.getTour(id);
-  console.log(tour);
 }]);
