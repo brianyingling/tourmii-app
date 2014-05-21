@@ -80,7 +80,7 @@ var app = angular.module('tourmii', [
     })
 
     .state('tour-detail', {
-      url: '/detail',
+      url: '/tours/:tourId/detail',
       templateUrl: 'templates/tour-detail.html',
       controller: 'TourDetailCtrl'
     });
