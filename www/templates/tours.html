@@ -1,15 +1,15 @@
-  <ion-view title="Tourmii">
-    <div class='bar bar-stable bar-subheader'>
-        <h2 class='title'>My Tours</h2>
+<ion-view title="Tourmii">
+
+  <div class='bar bar-stable bar-subheader'>
+    <h2 class='title'>My Tours</h2>
+  </div>
+
+  <ion-content class='has-header has-subheader padding'>
+    <div class='list'>
+      <a class='item' ng-repeat="tour in tours" ng-click="viewTour(tour.id)">
+        {{tour.name}}
+      </a>
     </div>
-    <ion-content class='has-header has-subheader padding'>
+  </ion-content>
 
-      <ul class='list'>
-        <li class='item' ng-repeat="tour in tours">
-          {{tour.name}}
-        </li>
-      </ul>
-
-
-    </ion-content>
-  </ion-view>
+</ion-view>
