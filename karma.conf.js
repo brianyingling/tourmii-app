@@ -19,6 +19,7 @@ module.exports = function(config) {
       "www/lib/ionic/js/*.js",
       "www/lib/ionic/js/**/*.js",
       "www/js/*.js",
+      "test/stateMock.js",
       "test/**/*Spec.js"
     ],
 

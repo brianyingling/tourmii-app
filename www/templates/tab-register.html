@@ -1,31 +1,41 @@
 <ion-view title="Tourmii">
   <ion-content class="has-header padding">
     <h1>Register</h1>
-    <form action="">
+    <form action="" ng-submit="submit()">
+
+      <div class='error' ng-repeat="error in errors">
+        {{error}}
+      </div>
+
       <label for="email" class='item item-input'>
-        <input type="text" placeholder="email" />
+        <input type="text" placeholder="email" ng-model="user.email"/>
       </label>
 
       <label for="first_name" class="item item-input">
-        <input type="text" placeholder="first name"/>
+        <input type="text" placeholder="first name" ng-model="user.first_name"/>
       </label>
 
       <label for="last_name" class="item item-input">
-        <input type="text" placeholder="last name"/>
+        <input type="text" placeholder="last name" ng-model="user.last_name"/>
       </label>
 
 
       <label for="password" class="item item-input">
-        <input type="password" placeholder="password" />
+        <input type="password" placeholder="password" ng-model="user.password"/>
       </label>
 
       <label for="confirm_password" class="item item-input">
-        <input type="password" placeholder="confirm password" />
+        <input type="password" placeholder="confirm password" ng-model="user.password_confirmation"/>
       </label>
 
       <button class="button button-block button-positive">
         Register
       </button>
+
+      <button type="button" class="button button-block button-assertive">
+        Clear Fields
+      </button>
+
 
     </form>
 
