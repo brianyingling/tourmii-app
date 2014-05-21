@@ -1,10 +1,10 @@
 describe('LoginCtrl', function() {
-  var $scope, $rootScope, $controller, $httpBackend;
+  var $scope, $rootScope, $controller, $httpBackend, $state;
   var loginCtrl;
 
-  beforeEach(module('stateMock'));
   beforeEach(module('tourmii'));
   beforeEach(module('tourmii.controllers'));
+  beforeEach(module('stateMock'));
 
   beforeEach(inject(function($injector, _$state_){
     $state       = _$state_;
@@ -38,19 +38,14 @@ describe('LoginCtrl', function() {
 
     });
     it('receives a user obj on successful HTTP request', function() {
-        $httpBackend.expectGET('templates/tabs.html').respond(true);
-        $httpBackend.expectGET('templates/tab-login.html').respond(true);
-        $httpBackend.expectGET('templates/tab-register.html').respond(true);
+        $state.expectTransitionTo('tours');
 
         expect($scope.user).toBeDefined();
         $httpBackend.flush();
     });
 
     it('saves the session id to localStorage on successful HTTP request', function() {
-      $httpBackend.expectGET('templates/tabs.html').respond(true);
-      $httpBackend.expectGET('templates/tab-login.html').respond(true);
-      $httpBackend.expectGET('templates/tab-register.html').respond(true);
-
+      $state.expectTransitionTo('tours');
 
       expect(localStorage['tourmii_session_id']).toBeDefined();
       $httpBackend.flush();
