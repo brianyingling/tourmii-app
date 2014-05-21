@@ -60,15 +60,20 @@ angular.module('tourmii.controllers', [])
 .controller('ToursCtrl', ['$scope', '$state', 'toursService',
   function($scope, $state, toursService) {
   $scope.tours = toursService.getTours();
-  console.log($scope.tours);
   $scope.viewTour = function(id) {
-    console.log(id);
-    $state.go('tour-detail');
+    console.log('id',id);
+    $state.go('tour-detail', {tourId:id});
   }
 
 
 }])
 
-.controller('TourDetailCtrl', ['$scope', function($scope) {
+.controller('TourDetailCtrl', ['$scope','$stateParams','toursService',
+  function($scope, $stateParams, toursService) {
+  var id, tour;
 
+  id   = $stateParams.tourId;
+  console.log('id',id);
+  $scope.tour = toursService.getTour(id);
+  console.log(tour);
 }]);
