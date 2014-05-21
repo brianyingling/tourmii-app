@@ -33,6 +33,9 @@ angular.module('tourmii.services', [])
     },
     getTours: function() {
       return tours;
+    },
+    getTour: function(id) {
+      return _.where(tours, {id: parseInt(id,10)})[0];
     }
   };
 
