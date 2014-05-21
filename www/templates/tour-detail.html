@@ -1,6 +1,14 @@
 <ion-view title="Tourmii">
 
   <ion-content>
-    <h2>Got here</h2>
+    <h2>{{tour.name}}</h2>
+
+    <div class='list'>
+      <a class='item' ng-repeat="step in tour.steps">
+        {{step.name}}
+      </a>
+
+    </div>
+
   </ion-content>
 </ion-view>
