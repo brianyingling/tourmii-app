@@ -1,8 +1,11 @@
   <ion-view title="Tourmii">
-    <ion-content class='has-header padding'>
+    <div class='bar bar-stable bar-subheader'>
+        <h2 class='title'>My Tours</h2>
+    </div>
+    <ion-content class='has-header has-subheader padding'>
 
-      <ul>
-        <li ng-repeat="tour in tours">
+      <ul class='list'>
+        <li class='item' ng-repeat="tour in tours">
           {{tour.name}}
         </li>
       </ul>
