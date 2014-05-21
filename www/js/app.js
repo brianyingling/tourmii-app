@@ -77,7 +77,15 @@ var app = angular.module('tourmii', [
       url: '/tours',
       templateUrl:'templates/tours.html',
       controller: 'ToursCtrl'
+    })
+
+    .state('tour-detail', {
+      url: '/detail',
+      templateUrl: 'templates/tour-detail.html',
+      controller: 'TourDetailCtrl'
     });
+
+
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/login');
