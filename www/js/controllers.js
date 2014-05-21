@@ -26,25 +26,32 @@ angular.module('tourmii.controllers', [])
   function($scope, $http, $location) {
   $scope.user   = {};
   $scope.errors = [];
+  var self = this;
 
   $scope.submit = function() {
-    $http.post("http://localhost:3000/users", {user:$scope.user})
-      .success(function(data) {
-        $scope.user = data;
-        console.log("id",data.user.id);
-        localStorage.setItem('tourmii_session_id', data.user.id);
-        $location.path('/tours');
-        console.log(data);
-      })
-      .error(function(data) {
-        errors = [];
-        for(var name in data.error.messages) {
-          error = name + ' ' + data.error.messages[name];
-          errors.push(error);
-        }
-        $scope.errors = errors;
-        console.log(data);
-      });
+    if (self.validate()) {
+      $http.post("http://localhost:3000/users", {user:$scope.user})
+        .success(function(data) {
+          $scope.user = data;
+          localStorage.setItem('tourmii_session_id', data.user.id);
+          $location.path('/tours');
+        })
+        .error(function(data) {
+          errors = [];
+          for(var name in data.error.messages) {
+            error = name + ' ' + data.error.messages[name];
+            errors.push(error);
+          }
+          $scope.errors = errors;
+        });
+    } else {
+      $scope.errors = [];
+      $scope.errors.push('Password and confirm password do not match');
+    }
+  };
+
+  this.validate = function() {
+    return $scope.user.password === $scope.user.password_confirmation;
   };
 
 
