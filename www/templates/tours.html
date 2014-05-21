@@ -1,5 +1,12 @@
   <ion-view title="Tourmii">
     <ion-content class='has-header padding'>
-      <h1>Got Here</h1>
+
+      <ul>
+        <li ng-repeat="tour in tours">
+          {{tour.name}}
+        </li>
+      </ul>
+
+
     </ion-content>
   </ion-view>
