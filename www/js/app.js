@@ -83,14 +83,30 @@ var app = angular.module('tourmii', [
       url: '/tours/:tourId/detail',
       templateUrl: 'templates/tour-detail.html',
       controller: 'TourDetailCtrl'
+    })
+
+    .state('step', {
+      url: '/tours/:tourId/steps/:stepId',
+      templateUrl:'templates/step.html',
+      resolve: {
+        getDetails: function($stateParams, googlePlacesService, toursService) {
+          var tour = toursService.getTour($stateParams.tourId);
+          var step = toursService.getStep(tour, $stateParams.stepId);
+          debugger;
+          return googlePlacesService.getPlaceDetails(step.reference, function(place) {
+            debugger;
+            return place;
+          });
+        }
+      },
+      controller:'StepCtrl'
+
     });
 
 
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/login');
-
-  // delete $httpProvider.defaults.headers.common["X-Requested-With"];
 
   // # Without server side support html5 must be disabled.
   $locationProvider.html5Mode(false);
