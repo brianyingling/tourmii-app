@@ -79,7 +79,6 @@ angular.module('tourmii.controllers', [])
   function($scope, $stateParams, getDetails, toursService, googlePlacesService) {
   var tourId, stepId, tour, step, details;
   var place = getDetails;
-  debugger;
 
   $scope.stepDetails = place;
   $scope.reviews = place.reviews;
