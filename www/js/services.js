@@ -50,11 +50,11 @@ angular.module('tourmii.services', [])
     center: new google.maps.LatLng(40.859239040, -74.437774074),
     zoom: 15
   });
-  var deferred = $q.defer();
 
   return {
     getPlaceDetails: function(ref, callback) {
-      var request = {reference:ref};
+      var request  = {reference:ref};
+      var deferred = $q.defer();
       service.getDetails(request, function(place, status) {
         deferred.resolve(place);
       });
