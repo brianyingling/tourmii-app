@@ -38,5 +38,27 @@ angular.module('tourmii.services', [])
       return _.where(tours, {id: parseInt(id,10)})[0];
     }
   };
+})
 
-});
+.service('googlePlacesService', ['$http', function($http) {
+  var GOOGLE_PLACES_API_KEY = "AIzaSyCvzuNHRQq5SRJZnyqPJ6c5nMzyeDm2kU0";
+  return {
+    getPlaceDetails: function(ref) {
+      var url = "https://maps.googleapis.com/maps/api/place/details/json?"+
+                "reference="+ref+
+                "&sensor=true"+
+                "&key="+GOOGLE_PLACES_API_KEY;
+
+      var data;
+      $http.get(url)
+        .success(function(resp) {
+          data = resp;
+        })
+        .error(function(resp) {
+          data = resp;
+        });
+
+        return resp;
+    }
+  };
+}]);
