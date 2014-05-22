@@ -36,28 +36,27 @@ angular.module('tourmii.services', [])
     },
     getTour: function(id) {
       return _.where(tours, {id: parseInt(id,10)})[0];
+    },
+    getStep: function(tour, stepId) {
+      return _.where(tour.steps, {id:parseInt(stepId,10)})[0];
     }
   };
 })
 
 .service('googlePlacesService', ['$http', function($http) {
   var GOOGLE_PLACES_API_KEY = "AIzaSyCvzuNHRQq5SRJZnyqPJ6c5nMzyeDm2kU0";
-  var map = new google.maps.Map(document.getElementById('map'));
+  var map     = new google.maps.Map(document.getElementById('map'));
   var service = new google.maps.places.PlacesService(map, {
     center: new google.maps.LatLng(40.859239040, -74.437774074),
     zoom: 15
   });
 
   return {
-    getPlaceDetails: function(ref) {
-      var request, details;
-
-      request = {reference:ref};
+    getPlaceDetails: function(ref, callback) {
+      var request = {reference:ref};
       service.getDetails(request, function(place, status) {
-        details = place;
+        callback(place);
       });
-
-      return details;
     }
   };
 }]);
