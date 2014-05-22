@@ -52,7 +52,7 @@ angular.module('tourmii.services', [])
   });
 
   return {
-    getPlaceDetails: function(ref, callback) {
+    getPlaceDetails: function(ref) {
       var request  = {reference:ref};
       var deferred = $q.defer();
       service.getDetails(request, function(place, status) {
