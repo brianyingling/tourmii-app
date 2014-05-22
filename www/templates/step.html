@@ -1,0 +1,13 @@
+<ion-view title="Tourmii">
+  <ion-content>
+    <h2>{{step.name}}</h2>
+    <p>
+      {{step.address}}
+    </p>
+
+    <div ng-repeat="review in reviews">
+      <p class="card">{{review.text}}</p>
+    </div>
+
+  </ion-content>
+</ion-view>
