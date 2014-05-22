@@ -6,7 +6,7 @@
     <div id="map"></div>
 
     <div class='list'>
-      <a class='item' ng-repeat="step in tour.steps">
+      <a class='item' ng-repeat="step in tour.steps" ng-click="viewStep(step.id)">
         {{step.name}}
       </a>
 
