@@ -92,11 +92,7 @@ var app = angular.module('tourmii', [
         getDetails: function($stateParams, googlePlacesService, toursService) {
           var tour = toursService.getTour($stateParams.tourId);
           var step = toursService.getStep(tour, $stateParams.stepId);
-          debugger;
-          return googlePlacesService.getPlaceDetails(step.reference, function(place) {
-            debugger;
-            return place;
-          });
+          return googlePlacesService.getPlaceDetails(step.reference);
         }
       },
       controller:'StepCtrl'
