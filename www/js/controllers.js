@@ -57,25 +57,44 @@ angular.module('tourmii.controllers', [])
 }])
 
 // TODO - handle list of user's tours
-.controller('ToursCtrl', ['$scope', '$state', 'toursService',
-  function($scope, $state, toursService) {
-  $scope.tours = toursService.getTours();
+.controller('ToursCtrl', ['$scope', '$state', 'toursService', function($scope, $state, toursService) {
+  $scope.tours    = toursService.getTours();
   $scope.viewTour = function(id) {
-    console.log('id',id);
     $state.go('tour-detail', {tourId:id});
   }
 }])
 
-.controller('TourDetailCtrl', ['$scope','$stateParams','toursService','googlePlacesService',
-  function($scope, $stateParams, toursService, googlePlacesService) {
-  var id      = $stateParams.tourId;
-  $scope.tour = toursService.getTour(id);
+.controller('TourDetailCtrl', ['$scope','$state','$stateParams','toursService',
+  function($scope, $state, $stateParams, toursService) {
+  var tourId      = $stateParams.tourId;
+  $scope.tour = toursService.getTour(tourId);
 
-  // for testing purposes
-  // var ref  = $scope.tour.steps[0].reference;
-  // var resp = googlePlacesService.getPlaceDetails(ref);
+  $scope.viewStep = function(stepId) {
+    $state.go('step', {stepId:stepId, tourId:tourId})
+  }
+}])
 
+// Shows the details of a step in a tour
+.controller('StepCtrl', ['$scope', '$stateParams', 'getDetails','toursService','googlePlacesService',
+  function($scope, $stateParams, getDetails, toursService, googlePlacesService) {
+  var tourId, stepId, tour, step, details;
+  var place = getDetails;
+  debugger;
 
+  $scope.stepDetails = place;
+  $scope.reviews = place.reviews;
+  // tourId = $stateParams.tourId;
+  // stepId = $stateParams.stepId;
+
+  // tour = toursService.getTour(tourId);
+  // step = toursService.getStep(tour, stepId);
+
+  // $scope.step = step;
+
+  // googlePlacesService.getPlaceDetails(step.reference, function(place) {
+  //   $scope.stepDetails = place;
+  //   $scope.reviews = place.reviews;
+  // });
 
 
 }]);
