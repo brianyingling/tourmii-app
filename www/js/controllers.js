@@ -66,7 +66,16 @@ angular.module('tourmii.controllers', [])
   }
 }])
 
-.controller('TourDetailCtrl', ['$scope','$stateParams','toursService', function($scope, $stateParams, toursService) {
+.controller('TourDetailCtrl', ['$scope','$stateParams','toursService','googlePlacesService',
+  function($scope, $stateParams, toursService, googlePlacesService) {
   var id      = $stateParams.tourId;
   $scope.tour = toursService.getTour(id);
+
+  // for testing purposes
+  // var ref  = $scope.tour.steps[0].reference;
+  // var resp = googlePlacesService.getPlaceDetails(ref);
+
+
+
+
 }]);
