@@ -90,7 +90,7 @@ var app = angular.module('tourmii', [
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/login');
 
-  delete $httpProvider.defaults.headers.common["X-Requested-With"];
+  // delete $httpProvider.defaults.headers.common["X-Requested-With"];
 
   // # Without server side support html5 must be disabled.
   $locationProvider.html5Mode(false);
