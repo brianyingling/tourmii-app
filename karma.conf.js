@@ -18,6 +18,8 @@ module.exports = function(config) {
       "www/lib/ionic/js/angular/angular.js",
       "www/lib/ionic/js/*.js",
       "www/lib/ionic/js/**/*.js",
+      "http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true",
+      "www/js/**/*.js",
       "www/js/*.js",
       "test/stateMock.js",
       "test/**/*Spec.js"
