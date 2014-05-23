@@ -76,7 +76,33 @@ var app = angular.module('tourmii', [
     .state('tours', {
       url: '/tours',
       templateUrl:'templates/tours.html',
-      controller: 'ToursCtrl'
+      controller: 'ToursCtrl',
+      resolve: {
+        getThumbnails: function($q, toursService, googlePlacesService) {
+          var tours, step, deferred, promise, stepDetails;
+          tours       = toursService.getTours();
+          deferred = $q.defer();
+          deferred.resolve(function() {
+            stepDetails = [];
+            var d = $q.defer();
+            d.resolve(_.each(tours, function(tour) {
+              if (tour.steps.length > 0) {
+                step = tour.steps[0];
+                googlePlacesService.getPlaceDetails(tour.steps[0].reference)
+                  .then(function(result) {
+                    debugger;
+                    stepDetails.push(result);
+                  });
+              }
+            }));
+            return d.promise.then(function(res){
+              return res;
+            });
+          });
+          debugger;
+          return deferred.promise;
+        }
+      }
     })
 
     .state('tour-detail', {
@@ -88,15 +114,14 @@ var app = angular.module('tourmii', [
     .state('step', {
       url: '/tours/:tourId/steps/:stepId',
       templateUrl:'templates/step.html',
+      controller:'StepCtrl',
       resolve: {
         getDetails: function($stateParams, googlePlacesService, toursService) {
           var tour = toursService.getTour($stateParams.tourId);
           var step = toursService.getStep(tour, $stateParams.stepId);
           return googlePlacesService.getPlaceDetails(step.reference);
         }
-      },
-      controller:'StepCtrl'
-
+      }
     });
 
 
