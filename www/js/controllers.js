@@ -55,8 +55,10 @@ angular.module('tourmii.controllers', [])
 }])
 
 // TODO - handle list of user's tours
-.controller('ToursCtrl', ['$scope', '$state', 'toursService', function($scope, $state, toursService) {
+.controller('ToursCtrl', ['$scope', '$state', 'getThumbnails','toursService', function($scope, $state, getThumbnails, toursService) {
   $scope.tours    = toursService.getTours();
+  $scope.getThumbnails = getThumbnails;
+  debugger;
   $scope.viewTour = function(id) {
     $state.go('tour-detail', {tourId:id});
   }
