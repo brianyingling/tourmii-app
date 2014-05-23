@@ -56,12 +56,32 @@ angular.module('tourmii.controllers', [])
 
 // TODO - handle list of user's tours
 .controller('ToursCtrl', ['$scope', '$state', 'getThumbnails','toursService', function($scope, $state, getThumbnails, toursService) {
-  $scope.tours    = toursService.getTours();
-  $scope.getThumbnails = getThumbnails;
-  debugger;
+  var thumbnailUrls = [];
+  $scope.tours = toursService.getTours();
+
+  // getting the thumbnails to the tours list
+  _.each(getThumbnails, function(thumbnail) {
+    if (thumbnail !== undefined) {
+      thumbnail.then(function(result) {
+        if (result === null || result.photos === undefined) {
+          thumbnailUrls.push("");
+        } else {
+          thumbnailUrls.push(result.photos[0].getUrl({maxWidth:50,maxHeight:50}));
+        }
+        $scope.thumbnailUrls = thumbnailUrls;
+      });
+    }
+  });
+
+  _.map($scope.tours, function(tour) {
+    _.each($scope.thumbnailUrls, function(url) {
+      tour.photoUrl = url;
+    });
+  });
+
   $scope.viewTour = function(id) {
     $state.go('tour-detail', {tourId:id});
-  }
+  };
 }])
 
 .controller('TourDetailCtrl', ['$scope','$state','$stateParams','toursService',
