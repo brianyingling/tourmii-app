@@ -2,11 +2,21 @@
   <ion-content>
     <h2>{{step.name}}</h2>
     <p>
-      {{step.address}}
+      {{step.formatted_address}}
     </p>
 
-    <div ng-repeat="review in reviews">
-      <p class="card">{{review.text}}</p>
+    <div ng-repeat="photoUrl in photoUrls">
+      <div class='card'>
+        <img ng-src="{{photoUrl}}" alt="photoUrl">
+      </div>
+    </div>
+
+    <div ng-repeat="review in step.reviews">
+      <p class="card">
+        {{review.text}}
+        -- {{review.author_name}}
+      </p>
+
     </div>
 
   </ion-content>
