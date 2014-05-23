@@ -13,11 +13,9 @@ angular.module('tourmii.controllers', [])
       .success(function(data) {
         localStorage['tourmii_session_id'] = data.id;
         toursService.setTours(data.tours);
-        console.log(toursService);
         $state.go('tours');
       })
       .error(function(data) {
-        console.log(data);
         $scope.errors.push(data.error.message);
       });
   };
@@ -70,30 +68,18 @@ angular.module('tourmii.controllers', [])
   $scope.tour = toursService.getTour(tourId);
 
   $scope.viewStep = function(stepId) {
-    $state.go('step', {stepId:stepId, tourId:tourId})
-  }
+    $state.go('step', {stepId:stepId, tourId:tourId});
+  };
 }])
 
 // Shows the details of a step in a tour
-.controller('StepCtrl', ['$scope', '$stateParams', 'getDetails','toursService','googlePlacesService',
-  function($scope, $stateParams, getDetails, toursService, googlePlacesService) {
-  var tourId, stepId, tour, step, details;
-  var place = getDetails;
+.controller('StepCtrl', ['$scope', 'getDetails', function($scope, getDetails) {
+  $scope.step        = getDetails;
+  $scope.photoUrls   = [];
 
-  $scope.stepDetails = place;
-  $scope.reviews = place.reviews;
-  // tourId = $stateParams.tourId;
-  // stepId = $stateParams.stepId;
-
-  // tour = toursService.getTour(tourId);
-  // step = toursService.getStep(tour, stepId);
-
-  // $scope.step = step;
-
-  // googlePlacesService.getPlaceDetails(step.reference, function(place) {
-  //   $scope.stepDetails = place;
-  //   $scope.reviews = place.reviews;
-  // });
-
+  for (var i=0;i<$scope.step.photos.length;i++) {
+    var url = $scope.step.photos[i].getUrl({maxWidth:350,maxHeight:350});
+    $scope.photoUrls.push(url);
+  }
 
 }]);
