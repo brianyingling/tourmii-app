@@ -80,27 +80,19 @@ var app = angular.module('tourmii', [
       resolve: {
         getThumbnails: function($q, toursService, googlePlacesService) {
           var tours, step, deferred, promise, stepDetails;
+
           tours       = toursService.getTours();
-          deferred = $q.defer();
-          deferred.resolve(function() {
-            stepDetails = [];
-            var d = $q.defer();
-            d.resolve(_.each(tours, function(tour) {
-              if (tour.steps.length > 0) {
-                step = tour.steps[0];
-                googlePlacesService.getPlaceDetails(tour.steps[0].reference)
-                  .then(function(result) {
-                    debugger;
-                    stepDetails.push(result);
-                  });
-              }
-            }));
-            return d.promise.then(function(res){
-              return res;
-            });
+          deferred    = $q.defer();
+          stepDetails = [];
+
+          return _.map(tours, function(tour) {
+            if (tour.steps.length > 0) {
+              step = tour.steps[0];
+              return googlePlacesService.getPlaceDetails(tour.steps[0].reference).then(function(result) {
+                  return result;
+                });
+            }
           });
-          debugger;
-          return deferred.promise;
         }
       }
     })
