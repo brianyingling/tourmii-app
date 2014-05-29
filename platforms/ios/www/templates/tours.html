@@ -6,11 +6,7 @@
 
   <ion-content class='has-header has-subheader padding'>
     <div class='list'>
-      <a class='item item-thumbnail-left' ng-repeat="tour in tours" ng-click="viewTour(tour.id)">
-        <img ng-src={{tour.photoUrl}} alt="">
-        <!-- <a class='item item-thumbnail-left' href='#'>
-          <img ng-src="{{tour.photoUrl}}" alt="">
-        </a> -->
+      <a class='item' ng-repeat="tour in tours" ng-click="viewTour(tour.id)">
         {{tour.name}}
       </a>
     </div>

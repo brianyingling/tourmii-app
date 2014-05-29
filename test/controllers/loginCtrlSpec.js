@@ -13,8 +13,6 @@ describe('LoginCtrl', function() {
     $scope       = $rootScope.$new();
     $controller  = $injector.get("$controller");
     loginCtrl    = $controller("LoginCtrl", {'$scope':$scope});
-
-
   }));
 
   it('has a LoginCtrl controller', function() {
