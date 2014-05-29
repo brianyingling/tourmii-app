@@ -77,17 +77,35 @@ angular.module('tourmii.services', [])
         }
     };
 })
-
+// https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&types=food&name=harbour&sensor=false&key=AIzaSyCvzuNHRQq5SRJZnyqPJ6c5nMzyeDm2kU0
 .service('googlePlacesService', ['$q', '$http', 'googleMap', function($q, $http, googleMap) {
   var GOOGLE_PLACES_API_KEY = "AIzaSyCvzuNHRQq5SRJZnyqPJ6c5nMzyeDm2kU0";
   var map = googleMap.createMap(document.getElementById('map'));
   var service = googleMap.placesService(map, 40.859239040, 74.437774074, 15);
+
   return {
     getPlaceDetails: function(ref) {
       var request  = {reference:ref};
       var deferred = $q.defer();
       service.getDetails(request, function(place, status) {
         deferred.resolve(place);
+      });
+      return deferred.promise;
+    },
+
+    search: function(query) {
+      var req, resp, deferred;
+
+      deferred = $q.defer();
+      req = {
+        // hardcoded -- dynamic coords will be added later.
+        location: new google.maps.LatLng(40.859239040, -74.437774074),
+        radius:   '500',
+        query:    query
+      };
+
+      service.textSearch(req, function(results, status) {
+        deferred.resolve(results);
       });
       return deferred.promise;
     }
