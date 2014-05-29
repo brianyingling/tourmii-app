@@ -108,5 +108,8 @@ angular.module('tourmii.controllers', [])
 
 // handles search
 .controller('SearchCtrl', ['$scope', function($scope) {
+  $scope.query = '';
+  $scope.submit = function() {
+  };
 
 }]);
