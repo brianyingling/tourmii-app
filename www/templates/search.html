@@ -1,5 +1,17 @@
 <ion-view title="Tourmii">
   <ion-content>
-    <h1>Got here</h1>
+    <div class='list list-inset'>
+      <form action="" ng-submit="submit()">
+        <label class='item item-input'>
+          <i class='icon ion-search placeholder-icon'></i>
+          <input type='text' placeholder='search' ng-model="query">
+        </label>
+      </form>
+    </div>
+
+    <div id='map'></div>
+
+
+</div>
   </ion-content>
 </ion-view>
