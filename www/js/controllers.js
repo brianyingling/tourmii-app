@@ -110,6 +110,7 @@ angular.module('tourmii.controllers', [])
 .controller('SearchCtrl', ['$scope', function($scope) {
   $scope.query = '';
   $scope.submit = function() {
+    // TODO -- handle user query
   };
 
 }]);
