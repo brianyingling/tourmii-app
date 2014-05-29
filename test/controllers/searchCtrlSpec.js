@@ -23,7 +23,10 @@ describe('SearchCtrl', function() {
 
   describe('.search', function() {
     it('queries the GooglePlacesService service when submitting a search', function() {
-      // expect(googlePlacesService.search).toHaveBeenCalled();
+      spyOn(googlePlacesService, 'search').andCallThrough();
+      $scope.query = 'hello';
+      $scope.submit();
+      expect(googlePlacesService.search).toHaveBeenCalled();
     });
   });
 
