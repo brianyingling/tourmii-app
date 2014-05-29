@@ -78,14 +78,6 @@ angular.module('tourmii.services', [])
     };
 })
 
-// .service('googlePlacesService', ['$q', '$http', function($q, $http) {
-//   var GOOGLE_PLACES_API_KEY = "AIzaSyCvzuNHRQq5SRJZnyqPJ6c5nMzyeDm2kU0";
-//   var map     = new google.maps.Map(document.getElementById('map'));
-//   var service = new google.maps.places.PlacesService(map, {
-//     center: new google.maps.LatLng(40.859239040, -74.437774074),
-//     zoom: 15
-//   });
-
 .service('googlePlacesService', ['$q', '$http', 'googleMap', function($q, $http, googleMap) {
   var GOOGLE_PLACES_API_KEY = "AIzaSyCvzuNHRQq5SRJZnyqPJ6c5nMzyeDm2kU0";
   var map = googleMap.createMap(document.getElementById('map'));
