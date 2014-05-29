@@ -23,7 +23,7 @@ describe('SearchCtrl', function() {
 
   describe('.search', function() {
     it('queries the GooglePlacesService service when submitting a search', function() {
-      // expect(googlePlacesService.search()).toHaveBeenCalled();
+      // expect(googlePlacesService.search).toHaveBeenCalled();
     });
   });
 
