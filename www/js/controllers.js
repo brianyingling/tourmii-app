@@ -104,4 +104,9 @@ angular.module('tourmii.controllers', [])
     $scope.photoUrls.push(url);
   }
 
+}])
+
+// handles search
+.controller('SearchCtrl', ['$scope', function($scope) {
+
 }]);
