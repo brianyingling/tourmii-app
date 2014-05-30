@@ -109,6 +109,15 @@ angular.module('tourmii.controllers', [])
 // handles search
 .controller('SearchCtrl', ['$scope','googlePlacesService', function($scope, googlePlacesService) {
   $scope.places = [];
+
+  $scope.map = {
+    center: {
+      latitude: 40.859239040,
+      longitude: -74.437774074
+    },
+    zoom: 8
+  };
+
   $scope.submit = function() {
     var res = googlePlacesService.search($scope.query);
     res.then(function(res){
