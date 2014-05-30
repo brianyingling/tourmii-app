@@ -108,15 +108,33 @@ angular.module('tourmii.controllers', [])
 
 // handles search
 .controller('SearchCtrl', ['$scope','googlePlacesService', function($scope, googlePlacesService) {
+  var lat, lng;
+
+  navigator.geolocation.getCurrentPosition(function(position) {
+    lat = position.coords.latitude;
+    lng = position.coords.longitude;
+
+  var mapOptions = {
+    panControl:     true,
+    zoomControl:    true,
+    scaleControl:   true,
+    mapTypeControl: true,
+    mapTypeId:      google.maps.MapTypeId.ROADMAP
+  };
+  debugger;
   $scope.places = [];
   $scope.hideMap = true;
   $scope.map = {
       center: {
-        latitude: 40.859239040,
-        longitude: -74.437774074
+        latitude:  lat,
+        longitude: lng
       },
-      zoom: 13
+      zoom: 13,
+      mapOptions: mapOptions,
+      isReady: true
     };
+      });
+
 
   $scope.submit = function() {
     var res = googlePlacesService.search($scope.query);
@@ -128,6 +146,23 @@ angular.module('tourmii.controllers', [])
           longitude: res[i].geometry.location.A
         };
       }
+      navigator.geolocation.getCurrentPosition(function(position) {
+        console.log(position);
+        var lat, lng;
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+        $scope.map.center.latitude  = lat;
+        $scope.map.center.longitude = lng;
+      },
+      function(err) {
+        console.log(err);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      });
+
       $scope.places  = res;
       $scope.hideMap = false;
 

@@ -10,14 +10,15 @@
       </form>
     </div>
 
-    <google-map center="map.center" zoom="map.zoom" ng-hide="hideMap" draggable='true'>
-      <marker
-        ng-repeat="place in places"
-        coords="{latitude: place.coords.latitude, longitude: place.coords.longitude}">
-      </marker>
+    <div ng-if='map.isReady'>
+      <google-map center="map.center" zoom="map.zoom" ng-hide="hideMap" draggable='true'>
+        <marker
+          ng-repeat="place in places"
+          coords="{latitude: place.coords.latitude, longitude: place.coords.longitude}">
+        </marker>
 
-    </google-map>
-
+      </google-map>
+    </div>
     <div class="list">
       <a class="item" ng-repeat="place in places">
         {{place.name}}
