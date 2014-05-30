@@ -82,7 +82,6 @@ angular.module('tourmii.services', [])
   var GOOGLE_PLACES_API_KEY = "AIzaSyCvzuNHRQq5SRJZnyqPJ6c5nMzyeDm2kU0";
   var map      = googleMap.createMap(document.getElementById('map'), googleMap.mapOptions);
   var service  = googleMap.placesService(map, 40.859239040, -74.437774074, 15);
-  debugger;
   var sanitize = function(query) {
     return query.replace(' ', '+');
   };
