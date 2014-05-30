@@ -13,11 +13,9 @@ angular.module('tourmii.controllers', [])
       .success(function(data) {
         localStorage['tourmii_session_id'] = data.id;
         toursService.setTours(data.tours);
-        console.log(toursService);
         $state.go('tours');
       })
       .error(function(data) {
-        console.log(data);
         $scope.errors.push(data.error.message);
       });
   };
@@ -57,17 +55,73 @@ angular.module('tourmii.controllers', [])
 }])
 
 // TODO - handle list of user's tours
-.controller('ToursCtrl', ['$scope', '$state', 'toursService',
-  function($scope, $state, toursService) {
+.controller('ToursCtrl', ['$scope', '$state', 'getThumbnails','toursService', function($scope, $state, getThumbnails, toursService) {
+  var thumbnailUrls = [];
   $scope.tours = toursService.getTours();
-  console.log($scope.tours);
-  $scope.viewTour = function(id) {
-    $state.go('tour-detail');
-  }
 
+  // getting the thumbnails to the tours list
+  _.each(getThumbnails, function(thumbnail) {
+    if (thumbnail !== undefined) {
+      thumbnail.then(function(result) {
+        if (result === null || result.photos === undefined) {
+          thumbnailUrls.push("");
+        } else {
+          thumbnailUrls.push(result.photos[0].getUrl({maxWidth:50,maxHeight:50}));
+        }
+        $scope.thumbnailUrls = thumbnailUrls;
+      });
+    }
+  });
+
+  _.map($scope.tours, function(tour) {
+    _.each($scope.thumbnailUrls, function(url) {
+      tour.photoUrl = url;
+    });
+  });
+
+  $scope.viewTour = function(id) {
+    $state.go('tour-detail', {tourId:id});
+  };
+}])
+
+.controller('TourDetailCtrl', ['$scope','$state','$stateParams','toursService',
+  function($scope, $state, $stateParams, toursService) {
+  var tourId      = $stateParams.tourId;
+  $scope.tour = toursService.getTour(tourId);
+
+  $scope.viewStep = function(stepId) {
+    $state.go('step', {stepId:stepId, tourId:tourId});
+  };
+}])
+
+// Shows the details of a step in a tour
+.controller('StepCtrl', ['$scope', 'getDetails', function($scope, getDetails) {
+  $scope.step        = getDetails;
+  $scope.photoUrls   = [];
+
+  for (var i=0;i<$scope.step.photos.length;i++) {
+    var url = $scope.step.photos[i].getUrl({maxWidth:350,maxHeight:350});
+    $scope.photoUrls.push(url);
+  }
 
 }])
 
-.controller('TourDetailCtrl', ['$scope', function($scope) {
+// handles search
+.controller('SearchCtrl', ['$scope','googlePlacesService', function($scope, googlePlacesService) {
+  $scope.places = [];
+
+  $scope.map = {
+    center: {
+      latitude: 40.859239040,
+      longitude: -74.437774074
+    }
+  };
+
+  $scope.submit = function() {
+    var res = googlePlacesService.search($scope.query);
+    res.then(function(res){
+      $scope.places = res;
+    });
+  };
 
 }]);

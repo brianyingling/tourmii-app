@@ -1,5 +1,6 @@
 var app = angular.module('tourmii', [
   'ionic',
+  'google-maps',
   'tourmii.controllers',
   'tourmii.services'])
 .run(['$ionicPlatform', function($ionicPlatform) {
@@ -76,21 +77,56 @@ var app = angular.module('tourmii', [
     .state('tours', {
       url: '/tours',
       templateUrl:'templates/tours.html',
-      controller: 'ToursCtrl'
+      controller: 'ToursCtrl',
+      resolve: {
+        getThumbnails: function($q, toursService, googlePlacesService) {
+          var tours, step, deferred, promise, stepDetails;
+
+          tours       = toursService.getTours();
+          deferred    = $q.defer();
+          stepDetails = [];
+
+          return _.map(tours, function(tour) {
+            if (tour.steps.length > 0) {
+              step = tour.steps[0];
+              return googlePlacesService.getPlaceDetails(tour.steps[0].reference).then(function(result) {
+                  return result;
+                });
+            }
+          });
+        }
+      }
     })
 
     .state('tour-detail', {
-      url: '/detail',
+      url: '/tours/:tourId/detail',
       templateUrl: 'templates/tour-detail.html',
       controller: 'TourDetailCtrl'
+    })
+
+    .state('step', {
+      url: '/tours/:tourId/steps/:stepId',
+      templateUrl:'templates/step.html',
+      controller:'StepCtrl',
+      resolve: {
+        getDetails: function($stateParams, googlePlacesService, toursService) {
+          var tour = toursService.getTour($stateParams.tourId);
+          var step = toursService.getStep(tour, $stateParams.stepId);
+          return googlePlacesService.getPlaceDetails(step.reference);
+        }
+      }
+    })
+
+    .state('search', {
+      url: '/search',
+      templateUrl: 'templates/search.html',
+      controller: 'SearchCtrl'
     });
 
 
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/login');
-
-  delete $httpProvider.defaults.headers.common["X-Requested-With"];
 
   // # Without server side support html5 must be disabled.
   $locationProvider.html5Mode(false);

@@ -1,0 +1,22 @@
+<ion-view title="Tourmii">
+
+  <ion-content  ng-controller="SearchCtrl">
+    <div class='list list-inset'>
+      <form action="" ng-submit="submit()">
+        <label class='item item-input'>
+          <i class='icon ion-search placeholder-icon'></i>
+          <input type='text' placeholder='search' ng-model="query">
+        </label>
+      </form>
+    </div>
+
+    <div id='map'></div>
+
+    <div class="list">
+      <a class="item" ng-repeat="place in places">
+        {{place.name}}
+      </a>
+    </div>
+
+  </ion-content>
+</ion-view>
