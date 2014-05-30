@@ -107,24 +107,27 @@ angular.module('tourmii.controllers', [])
 }])
 
 // handles search
-.controller('SearchCtrl', ['$scope','googlePlacesService', function($scope, googlePlacesService) {
-  var lat, lng;
+.controller('SearchCtrl', ['$scope','googlePlacesService', 'LocationService', function($scope, googlePlacesService, LocationService) {
+  var lat, lng, location, mapOptions;
 
-  navigator.geolocation.getCurrentPosition(function(position) {
-    lat = position.coords.latitude;
-    lng = position.coords.longitude;
+  // location is a promise that when resolved contains
+  // a pos obj with lat and lng coords
+  location = LocationService.getCurrentLocation();
+  location.then(function(pos) {
+    lat = pos.coords.latitude;
+    lng = pos.coords.longitude;
 
-  var mapOptions = {
-    panControl:     true,
-    zoomControl:    true,
-    scaleControl:   true,
-    mapTypeControl: true,
-    mapTypeId:      google.maps.MapTypeId.ROADMAP
-  };
-  debugger;
-  $scope.places = [];
-  $scope.hideMap = true;
-  $scope.map = {
+    mapOptions = {
+      panControl:     true,
+      zoomControl:    true,
+      scaleControl:   true,
+      mapTypeControl: true,
+      mapTypeId:      google.maps.MapTypeId.ROADMAP
+    };
+
+    $scope.places = [];
+    $scope.hideMap = true;
+    $scope.map = {
       center: {
         latitude:  lat,
         longitude: lng
@@ -133,7 +136,7 @@ angular.module('tourmii.controllers', [])
       mapOptions: mapOptions,
       isReady: true
     };
-      });
+  });
 
 
   $scope.submit = function() {

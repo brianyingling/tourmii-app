@@ -77,6 +77,35 @@ angular.module('tourmii.services', [])
       }
     };
 })
+
+.service('LocationService', ['$q', function($q) {
+  return {
+    getCurrentLocation: function() {
+      var lat, lng, deferred;
+      deferred = $q.defer();
+
+      navigator.geolocation.getCurrentPosition(function(pos) {
+        deferred.resolve(pos);
+      });
+
+      return deferred.promise;
+    }
+  };
+}])
+
+.service('GoogleMapService', function() {
+  var map, mapOptions;
+
+  mapOptions = {
+    panControl:     true,
+    zoomControl:    true,
+    scaleControl:   true,
+    mapTypeControl: true,
+    mapTypeId:      google.maps.MapTypeId.ROADMAP
+  };
+
+})
+
 // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&types=food&name=harbour&sensor=false&key=AIzaSyCvzuNHRQq5SRJZnyqPJ6c5nMzyeDm2kU0
 .service('googlePlacesService', ['$q', '$http', 'googleMap', function($q, $http, googleMap) {
   var GOOGLE_PLACES_API_KEY = "AIzaSyCvzuNHRQq5SRJZnyqPJ6c5nMzyeDm2kU0";
