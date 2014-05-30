@@ -106,6 +106,10 @@ angular.module('tourmii.controllers', [])
 
 }])
 
+.controller('PlaceCtrl', ['$scope', function($scope) {
+
+}])
+
 // handles search
 .controller('SearchCtrl', ['$scope','googlePlacesService', 'LocationService', function($scope, googlePlacesService, LocationService) {
   var lat, lng, location, mapOptions;
