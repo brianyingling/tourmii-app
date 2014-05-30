@@ -121,7 +121,15 @@ var app = angular.module('tourmii', [
       url: '/search',
       templateUrl: 'templates/search.html',
       controller: 'SearchCtrl'
+    })
+
+    .state('place', {
+      url: '/places/:placeId',
+      templateUrl: 'templates/place.html',
+      controller: 'PlaceCtrl'
     });
+
+
 
 
 
