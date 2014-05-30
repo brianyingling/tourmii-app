@@ -13,10 +13,9 @@
     <google-map center="map.center" zoom="map.zoom" ng-hide="hideMap" draggable='true'>
       <marker
         ng-repeat="place in places"
-        coords="{latitude: place.coords.latitude, longitude: place.coords.longitude}"
-      >
-
+        coords="{latitude: place.coords.latitude, longitude: place.coords.longitude}">
       </marker>
+
     </google-map>
 
     <div class="list">
