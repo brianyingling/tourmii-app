@@ -121,7 +121,14 @@ angular.module('tourmii.controllers', [])
   $scope.submit = function() {
     var res = googlePlacesService.search($scope.query);
     res.then(function(res){
-      $scope.places = res;
+      // getting rid of uglification
+      for (var i=0; i <res.length; i++) {
+        res[i].coords = {
+          latitude: res[i].geometry.location.k,
+          longitude: res[i].geometry.location.A
+        };
+      }
+      $scope.places  = res;
       $scope.hideMap = false;
 
     });
