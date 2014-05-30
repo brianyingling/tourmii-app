@@ -1,5 +1,6 @@
 var app = angular.module('tourmii', [
   'ionic',
+  'google-maps',
   'tourmii.controllers',
   'tourmii.services'])
 .run(['$ionicPlatform', function($ionicPlatform) {
