@@ -108,10 +108,11 @@ angular.module('tourmii.controllers', [])
 
 // handles search
 .controller('SearchCtrl', ['$scope','googlePlacesService', function($scope, googlePlacesService) {
+  $scope.places = [];
   $scope.submit = function() {
     var res = googlePlacesService.search($scope.query);
     res.then(function(res){
-      console.log(res);
+      $scope.places = res;
     });
   };
 
