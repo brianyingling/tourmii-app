@@ -114,6 +114,12 @@ var app = angular.module('tourmii', [
           return googlePlacesService.getPlaceDetails(step.reference);
         }
       }
+    })
+
+    .state('search', {
+      url: '/search',
+      templateUrl: 'templates/search.html',
+      controller: 'SearchCtrl'
     });
 
 

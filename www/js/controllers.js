@@ -104,4 +104,16 @@ angular.module('tourmii.controllers', [])
     $scope.photoUrls.push(url);
   }
 
+}])
+
+// handles search
+.controller('SearchCtrl', ['$scope','googlePlacesService', function($scope, googlePlacesService) {
+  $scope.places = [];
+  $scope.submit = function() {
+    var res = googlePlacesService.search($scope.query);
+    res.then(function(res){
+      $scope.places = res;
+    });
+  };
+
 }]);
